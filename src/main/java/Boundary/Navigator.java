@@ -85,9 +85,6 @@ public class Navigator extends JFrame {
         setTitle("Modifica Piatto");
         layout.show(container, "MODIFICA_PIATTO");
     }
-    public void showMonitoraSistema() {
-        setTitle("Monitoraggio Sistema");
-    }
 
     public void showMonitoraOrdine() {
         setTitle("Monitora Ordine");
@@ -100,7 +97,7 @@ public class Navigator extends JFrame {
         layout.show(container, "GESTISCI_ORDINE");
     }
 
-    /*public void showMonitoraSistema(){
+    public void showMonitoraSistema(){
         setTitle("Gestione Sistema");
         layout.show(container, "MONITORA_SISTEMA");
     }
