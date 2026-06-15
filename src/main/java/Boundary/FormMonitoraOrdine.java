@@ -1,6 +1,5 @@
-package Boundary.FormMonitoraOrdine;
+package Boundary;
 
-import Boundary.Navigator;
 import Controller.MonitoraOrdineController;
 import Database.Session;
 import Entity.Cliente;
