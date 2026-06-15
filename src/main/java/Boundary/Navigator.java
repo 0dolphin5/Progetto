@@ -15,7 +15,6 @@ public class Navigator extends JFrame {
     private FormListaRistoranti formListaRistoranti;
     private FormAmministratore formAmministratore;
 
-
     public Navigator(){
         layout = new CardLayout();
         container = new JPanel(layout);
