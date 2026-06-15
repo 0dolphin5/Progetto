@@ -13,6 +13,7 @@ public class Navigator extends JFrame {
     private FormOrdinazione formOrdinazione;
     private FormMonitoraOrdine formMonitoraOrdine;
     private FormListaRistoranti formListaRistoranti;
+    private FormAmministratore formAmministratore;
 
 
     public Navigator(){
@@ -32,6 +33,8 @@ public class Navigator extends JFrame {
         container.add(new Login(this).getContentPane(), "LOGIN");
         container.add(new Register(this).getContentPane(), "REGISTER");
         container.add(new ModificaPiatto(this).getContentPane(), "MODIFICA_PIATTO");
+        formAmministratore = new FormAmministratore(this);
+        container.add(formAmministratore.contentPane, "MONITORA_SISTEMA");
         //container.add(new FormAmministratore(this).contentPane, "MONITORA_SISTEMA");
         container.add(formMonitoraOrdine.contentPane, "MONITORA_ORDINE");
 
@@ -73,6 +76,8 @@ public class Navigator extends JFrame {
         setTitle("Modifica Piatto");
         layout.show(container,"MODIFICA_PIATTO");
     }
+    public void showMonitoraSistema(){
+        setTitle("Monitoraggio Sistema");
     public void showMonitoraOrdine() {
         setTitle("Monitora Ordine");
         formMonitoraOrdine.caricaOrdiniCliente();
@@ -81,7 +86,7 @@ public class Navigator extends JFrame {
     /*public void showMonitoraSistema(){
         setTitle("Gestione Sistema");
         layout.show(container, "MONITORA_SISTEMA");
-    }*/
+    }
     public void setNomeRistorante(String nome) {
         this.nomeRistorante = nome;
     }
