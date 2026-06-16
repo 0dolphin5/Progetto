@@ -2,14 +2,15 @@ package Controller;
 
 import Database.Session;
 import Entity.*;
-
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 public class OrdinazioneControllerStub {
 
     public static boolean salvaOrdinazione(ArrayList<String> piatti, ArrayList<Integer> quantita, String via,
             String civico, String cap, String citta, Long ristoranteId) {
+
         try {
             Cliente cliente = (Cliente) Session.getInstance().getUtenteLoggato();
             if (cliente == null) {
@@ -47,4 +48,52 @@ public class OrdinazioneControllerStub {
             return false;
         }
     }
+
+    public static boolean controllaMeglioIndirizzo(String via, String civico, String cap, String citta) {
+
+        if (via.length() > 40) {
+            JOptionPane.showMessageDialog(null, "La via non può superare i 40 caratteri", "Errore",
+                    JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if (!isValid(via)) {
+            JOptionPane.showMessageDialog(null, "La via contiene caratteri non alfanumerici", "Errore",
+                    JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        if (civico.length() > 5) {
+            JOptionPane.showMessageDialog(null, "Il civico non può superare i 5 caratteri", "Errore",
+                    JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if (!isValid(civico)) {
+            JOptionPane.showMessageDialog(null, "Il civico contiene caratteri non numerici", "Errore",
+                    JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        if (cap.length() != 5) {
+            JOptionPane.showMessageDialog(null, "Il CAP deve essere di 5 caratteri", "Errore",
+                    JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if (!isValid(cap)) {
+            JOptionPane.showMessageDialog(null, "Il CAP contiene caratteri non numerici", "Errore",
+                    JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        if (citta.length() > 20) {
+            JOptionPane.showMessageDialog(null, "La città non può superare i 20 caratteri", "Errore",
+                    JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean isValid(String s) {
+        return s.matches("[\\p{L}0-9/\\s.,'-]+");
+    }
+
 }

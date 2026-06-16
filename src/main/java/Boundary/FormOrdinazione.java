@@ -368,12 +368,7 @@ public class FormOrdinazione {
         String cap = capTextField.getText();
         String citta = cittaTextField.getText();
 
-        if (via.isBlank() || civico.isBlank() || cap.isBlank() || citta.isBlank()) {
-            JOptionPane.showMessageDialog(null, "Inserire un indirizzo di consegna completo");
-            lblesito.setText("Errore: Ordinazione non salvata");
-            lblesito.setForeground(Color.RED);
-            return;
-        }
+        boolean controllo = OrdinazioneControllerStub.controllaMeglioIndirizzo(via, civico, cap, citta);
 
         String indirizzo = via + " " + civico + " " + cap + " " + citta;
 
@@ -402,10 +397,15 @@ public class FormOrdinazione {
                     JLabel prezzo = (JLabel) rigamenu.getComponent(1);
                     JSpinner quantita_ = (JSpinner) rigamenu.getComponent(2);
 
-                    if ((int) quantita_.getValue() < 0) {
-                        JOptionPane.showMessageDialog(null, "Inserire una quantità valida");
+
+                    if((int)quantita_.getValue()<0){
+                        JOptionPane.showMessageDialog(null, "Inserire una quantità non negativa");
                         flag = true;
-                    } else if (indirizzo.isBlank()) {
+                    }
+                    if((int) quantita_.getValue() > 99 ){
+                        JOptionPane.showMessageDialog(null, "Inserire una quantità non superiore a 99");
+                        flag = true;
+                    } else if (indirizzo.isBlank() || via.isBlank() || civico.isBlank() || cap.isBlank() || citta.isBlank()) {
                         JOptionPane.showMessageDialog(null, "Inserire un indirizzo di consegna completo");
                         flag = true;
                     } else if ((int) quantita_.getValue() > 0) {
@@ -418,7 +418,7 @@ public class FormOrdinazione {
             }
         }
 
-        if (flag) {
+        if (flag || !controllo) {
             lblesito.setText("Errore: Ordinazione non salvata");
             lblesito.setForeground(Color.RED);
             return;
