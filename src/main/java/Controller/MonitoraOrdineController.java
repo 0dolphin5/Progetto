@@ -1,36 +1,52 @@
 package Controller;
 
+import Database.Session;
+import Entity.Cliente;
 import Entity.GestoreOrdini;
 import Entity.Ordine;
+import Entity.Utente;
 
 import java.util.List;
 
 public class MonitoraOrdineController {
 
-    public static List<Ordine> richiediListaOrdini(Long idCliente){
+    public static List<Ordine> richiediListaOrdiniClienteLoggato() {
 
-        GestoreOrdini gestoreOrdini = new GestoreOrdini();
-        if (idCliente == null) {
+        Utente utente = Session.getInstance().getUtenteLoggato();
+
+        if (!(utente instanceof Cliente cliente)) {
             return null;
         }
+
+        Long idCliente = cliente.getId();
+
+        GestoreOrdini gestoreOrdini = new GestoreOrdini();
 
         return gestoreOrdini.cercaOrdiniDelCliente(idCliente);
     }
 
-    public static String richiediStatoOrdine(Long idOrdine, Long idCliente) {
+    public static String richiediStatoOrdine(Long idOrdine) {
+
+        Utente utente = Session.getInstance().getUtenteLoggato();
+
+        if (!(utente instanceof Cliente cliente)) {
+            return "Nessun cliente autenticato";
+        }
+
+        if (idOrdine == null) {
+            return "Ordine non valido";
+        }
+
+        Long idCliente = cliente.getId();
 
         GestoreOrdini gestoreOrdini = new GestoreOrdini();
-        if (idOrdine == null || idCliente == null) {
-           return null;
-       }
 
-       String stato =  gestoreOrdini.cercaStatoOrdine(idOrdine, idCliente);
+        String stato = gestoreOrdini.cercaStatoOrdine(idCliente, idOrdine);
 
-       if (stato == null ) {
-           return "Stato non riconosciuto";
-       }
+        if (stato == null) {
+            return "Stato non riconosciuto";
+        }
 
-       return stato;
+        return stato;
     }
-
 }
