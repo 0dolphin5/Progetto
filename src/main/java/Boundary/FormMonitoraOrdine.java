@@ -71,19 +71,16 @@ public class FormMonitoraOrdine {
         return contentPane;
     }
 
-    private final MonitoraOrdineController controller;
     private final Navigator navigator;
 
     public FormMonitoraOrdine(Navigator navigator) //questo costruttore viene chiamato quando apro la schermata
     {
         this.navigator = navigator;
-        this.controller = new MonitoraOrdineController();
 
         InizializzaComponenti();
 
         btnMonitora.addActionListener(e -> monitoraOrdineSelezionato());
         btn_indietro.addActionListener(e -> tornaIndietro());
-
 
     }
 
