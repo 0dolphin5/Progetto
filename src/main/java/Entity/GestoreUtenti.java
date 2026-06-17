@@ -13,30 +13,15 @@ public class GestoreUtenti {
         gp = new GestorePersistenza();
     }
 
-    public Utente registraUtente(String nome, String cognome, String email, String ruolo, String via, String civico, int cap, String citta) {
-        if (nome == null || cognome == null || email == null || ruolo == null || via == null || civico == null || citta == null) {
-            System.err.println("Errore: Impossibile registrare l'utente. Dati mancanti.");
-            return null;
-        }
-         Utente u = null;
-        if(ruolo.equalsIgnoreCase("CLIENTE")){
-            u = new Cliente(nome, cognome, email, ruolo, via, civico, cap, citta);
-        }
-        if(ruolo.equalsIgnoreCase("RISTORATORE")){
-            u = new Ristoratore(nome,cognome, email, ruolo, via, civico, cap, citta);
-        }
-        if(ruolo.equalsIgnoreCase("AMMINISTRATORE")){
-            u = new Amministratore(nome, cognome, email, ruolo, via, civico, citta, cap);
-        }
-
+    public boolean registraUtente(Utente u) {
         boolean esito = gp.salva(u);
 
         if (esito) {
             gp.aggiorna(u);
-            return u;
+            return true;
         } else {
             System.err.println("Errore durante il salvataggio dell'utente nel database.");
-            return null;
+            return false;
         }
     }
 

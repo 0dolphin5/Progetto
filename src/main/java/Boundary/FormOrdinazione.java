@@ -32,7 +32,6 @@ public class FormOrdinazione {
     private JTextField Piatto3;
     private JLabel NomeRistorante;
     private JLabel lblesito;
-    private JTextField IndirizzotextField;
     private JLabel lblPrezzo;
     private JComboBox tipoStradaComboBox;
     private JTextField nCivicoTextField;

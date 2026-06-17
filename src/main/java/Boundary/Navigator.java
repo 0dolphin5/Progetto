@@ -25,16 +25,12 @@ public class Navigator extends JFrame {
         container.add(new FormHome(this).contentPane, "HOME");
         formListaRistoranti = new FormListaRistoranti(this);
         container.add(formListaRistoranti.contentPane, "LISTA_RISTORANTI");
-        container.add(new FormGestioneRistorante(this).contentPane, "GESTIONE_RISTORANTE");
         formOrdinazione = new FormOrdinazione(this);
         container.add(formOrdinazione.contentPane, "ORDINAZIONE");
-
         formMonitoraOrdine = new FormMonitoraOrdine(this);
         container.add(formMonitoraOrdine.contentPane, "MONITORA_ORDINE");
-
         container.add(new Login(this).getContentPane(), "LOGIN");
         container.add(new Register(this).getContentPane(), "REGISTER");
-        container.add(new ModificaPiatto(this).getContentPane(), "MODIFICA_PIATTO");
         formAmministratore = new FormAmministratore(this);
         container.add(formAmministratore.contentPane, "MONITORA_SISTEMA");
         container.add(formMonitoraOrdine.contentPane, "MONITORA_ORDINE");
@@ -115,18 +111,6 @@ public class Navigator extends JFrame {
 
     public Ristorante getRistoranteSelezionato() {
         return ristoranteSelezionato;
-    }
-
-    public Cliente getClienteLoggato() {
-        if (Session.getInstance().getUtenteLoggato() instanceof Cliente cliente) {
-            return cliente;
-        }
-        return null;
-    }
-
-    public void logout() {
-        Session.getInstance().logout();
-        showHome();
     }
 
     public static void clearFields(Container container) {
