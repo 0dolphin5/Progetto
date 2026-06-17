@@ -52,7 +52,15 @@ public class Ristoratore extends Utente {
     }
 
     public Ristorante creaRistorante(String nome, String descrizione, String via, String civico, String citta, int cap, String giorno, int inizioServizio, int fineServizio) {
-        return new Ristorante(nome, descrizione, via, civico, citta, cap, giorno, inizioServizio, fineServizio, this);
+        if (nome == null || descrizione == null || via == null || civico == null || citta == null) {
+            System.err.println("Errore: Impossibile registrare il ristorante. Dati mancanti.");
+            return null;
+        }
+        Ristorante r = new Ristorante(nome, descrizione, via, civico, citta, cap, giorno, inizioServizio, fineServizio, this);
+        addRistorante(r);
+        GestoreRistoranti gr = new GestoreRistoranti();
+        gr.registraRistorante(r);
+        return r;
     }
 
 }

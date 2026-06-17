@@ -14,21 +14,13 @@ public class GestoreRistoranti {
         gp = new GestorePersistenza();
     }
 
-    public Ristorante registraRistorante(String nome, String descrizione, String via, String civico, String citta,
-            int cap, String giorno, int inizioServizio, int fineServizio) {
-        if (nome == null || descrizione == null || via == null || civico == null || citta == null) {
-            System.err.println("Errore: Impossibile registrare il ristorante. Dati mancanti.");
-            return null;
-        }
-        Ristoratore r = (Ristoratore) Session.getInstance().getUtenteLoggato();
-        Ristorante ristorante = r.creaRistorante(nome, descrizione, via, civico, citta, cap, giorno, inizioServizio,
-                fineServizio);
+    public Ristorante registraRistorante(Ristorante r) {
 
-        boolean esito = gp.salva(ristorante);
+        boolean esito = gp.salva(r);
 
         if (esito) {
-            gp.aggiorna(ristorante);
-            return ristorante;
+            gp.aggiorna(r);
+            return r;
         } else {
             System.err.println("Errore durante il salvataggio del ristorante nel database.");
             return null;

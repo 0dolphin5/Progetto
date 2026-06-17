@@ -84,7 +84,7 @@ public class GestoreOrdini {
         ordine.setIndirizzoConsegna(indirizzoConsegna);
         // il carrello associato all'ordine deve rimanere invariato
         // se il Cliente desidera modificarlo dovrà eliminare l'ordine corrente e
-        // crearne un'altro
+        // crearne un altro
 
         // Aggiorno il Ordine nel database
         return gp.aggiorna(ordine);
